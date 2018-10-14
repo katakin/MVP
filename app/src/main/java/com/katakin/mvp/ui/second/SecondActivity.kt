@@ -71,7 +71,7 @@ class SecondActivity : BaseActivity(), SecondContract.View {
         viewPager.adapter = SecondViewPagerAdapter(supportFragmentManager)
         viewPager.addOnPageChangeListener(object : ViewPager.SimpleOnPageChangeListener() {
             override fun onPageSelected(position: Int) {
-//                bottom_navigation.selectedItemId = bottom_navigation.menu.getItem(position).itemId
+                bottom_navigation.selectedItemId = bottom_navigation.menu.getItem(position).itemId
             }
         })
     }
