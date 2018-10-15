@@ -9,7 +9,6 @@ import com.katakin.mvp.R
 import com.katakin.mvp.di.base.subcomponent
 import com.katakin.mvp.di.second.SecondActivityComponent
 import com.katakin.mvp.ui.base.BaseActivity
-import io.reactivex.subjects.PublishSubject
 import kotlinx.android.synthetic.main.activity_second.*
 import javax.inject.Inject
 
@@ -18,14 +17,9 @@ class SecondActivity : BaseActivity(), SecondContract.View {
     @Inject
     lateinit var presenter: SecondContract.Presenter
 
-    @Inject
-    lateinit var componentChangeSubject : PublishSubject<Boolean>
-
-    private var component by subcomponent(
-            SecondActivityComponent::class.java.simpleName,
-            { secondBuilder().build() },
-            { componentChangeSubject.onNext(true) }
-    )
+    private var component by subcomponent(SecondActivityComponent::class.java) {
+        secondBuilder().build()
+    }
 
     override fun injectComponent() {
         component?.inject(this)

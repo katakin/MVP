@@ -6,33 +6,28 @@ import kotlin.properties.ReadWriteProperty
 import kotlin.reflect.KProperty
 
 fun <T : BaseComponent, P : BaseComponent> subcomponent(
-        componentSimpleName: String,
-        parentComponentSimpleName: String,
-        block: P.() -> T,
-        afterChange: () -> Unit
+        componentClazz: Class<T>,
+        parentComponentClazz: Class<P>,
+        block: P.() -> T
 ): ReadWriteProperty<Any?, T?> = DaggerSubcomponentDelegate(
-        componentSimpleName,
-        ComponentManager.getComponents().find(parentComponentSimpleName)!!,
-        block,
-        afterChange
+        componentClazz,
+        ComponentManager.getTreeComponent().find(parentComponentClazz)!!,
+        block
 )
 
 fun <T : BaseComponent> subcomponent(
-        componentSimpleName: String,
-        block: AppComponent.() -> T,
-        afterChange: () -> Unit
+        componentClazz: Class<T>,
+        block: AppComponent.() -> T
 ): ReadWriteProperty<Any?, T?> = DaggerSubcomponentDelegate(
-        componentSimpleName,
-        ComponentManager.getComponents(),
-        block,
-        afterChange
+        componentClazz,
+        ComponentManager.getTreeComponent(),
+        block
 )
 
 private class DaggerSubcomponentDelegate<in Any, T : BaseComponent, P : BaseComponent>(
-        private val componentName: String,
+        private val componentClazz: Class<T>,
         private val parentTree: TreeComponent,
-        private val initializer: P.() -> T,
-        private val afterChange: () -> Unit
+        private val initializer: P.() -> T
 ) : ReadWriteProperty<Any?, T?> {
 
     private var tree: TreeComponent? = null
@@ -55,12 +50,11 @@ private class DaggerSubcomponentDelegate<in Any, T : BaseComponent, P : BaseComp
             tree?.remove()
             tree = null
         }
-        afterChange()
     }
 
     @Suppress("UNCHECKED_CAST")
     private fun makeTree(): TreeComponent {
-        var componentTree = parentTree.find(componentName)
+        var componentTree = parentTree.find(componentClazz)
         if (componentTree == null) {
             val value = (parentTree.component as P).initializer()
             componentTree = TreeComponent(value).also {

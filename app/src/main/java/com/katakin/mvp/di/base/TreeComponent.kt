@@ -14,12 +14,12 @@ class TreeComponent(var component: BaseComponent?) {
         parent?.children?.remove(this)
     }
 
-    fun find(simpleName: String): TreeComponent? {
-        if (component?.javaClass?.simpleName?.contains(simpleName, true) == true) {
+    fun <T> find(componentClazz: Class<T>): TreeComponent? {
+        if (component?.javaClass?.simpleName?.contains(componentClazz.simpleName, true) == true) {
             return this
         } else {
             children.forEach {
-                val result = it.find(simpleName)
+                val result = it.find(componentClazz)
                 if (result != null) {
                     return result
                 }

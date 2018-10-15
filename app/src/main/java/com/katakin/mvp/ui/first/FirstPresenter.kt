@@ -6,9 +6,7 @@ import java.lang.ref.WeakReference
 import javax.inject.Inject
 
 @ActivityScope
-class FirstPresenter @Inject constructor(
-
-) : FirstContract.Presenter {
+class FirstPresenter @Inject constructor() : FirstContract.Presenter {
 
     private var viewReference: WeakReference<FirstContract.View>? = null
 
@@ -16,6 +14,9 @@ class FirstPresenter @Inject constructor(
         viewReference = WeakReference(view)
 
         viewReference?.get()?.initActionBar()
+    }
+
+    override fun onStart() {
         viewReference?.get()?.initViewText()
         viewReference?.get()?.initPresenterText(hashCode())
         viewReference?.get()?.initComponents()

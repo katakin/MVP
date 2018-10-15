@@ -7,13 +7,10 @@ import android.view.View
 import android.view.ViewGroup
 
 import com.katakin.mvp.R
-import com.katakin.mvp.di.ComponentManager
 import com.katakin.mvp.di.base.subcomponent
 import com.katakin.mvp.di.second.SecondActivityComponent
 import com.katakin.mvp.di.second.tabs.first.FirstTabComponent
 import com.katakin.mvp.ui.base.ViewPagerFragment
-import io.reactivex.disposables.Disposable
-import io.reactivex.subjects.PublishSubject
 import kotlinx.android.synthetic.main.fragment_first_tab.*
 import javax.inject.Inject
 
@@ -28,17 +25,9 @@ class FirstTabFragment : ViewPagerFragment(), FirstTabContract.View {
     @Inject
     lateinit var presenter: FirstTabContract.Presenter
 
-    @Inject
-    lateinit var componentChangeSubject : PublishSubject<Boolean>
-
-    private var disposable: Disposable? = null
-
-    private var component by subcomponent<FirstTabComponent, SecondActivityComponent>(
-            FirstTabComponent::class.java.simpleName,
-            SecondActivityComponent::class.java.simpleName,
-            { firstTabBuilder().build() },
-            { componentChangeSubject.onNext(true) }
-    )
+    private var component by subcomponent(FirstTabComponent::class.java, SecondActivityComponent::class.java) {
+        firstTabBuilder().build()
+    }
 
     override fun injectComponent() {
         component?.inject(this)
@@ -51,9 +40,6 @@ class FirstTabFragment : ViewPagerFragment(), FirstTabContract.View {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         presenter.onFragmentAttach(this)
-        disposable = componentChangeSubject.subscribe {
-            initComponents()
-        }
     }
 
     override fun onVisibleToUser() {
@@ -67,7 +53,6 @@ class FirstTabFragment : ViewPagerFragment(), FirstTabContract.View {
     override fun onDestroyView() {
         super.onDestroyView()
         presenter.onFragmentDetach()
-        disposable?.dispose()
     }
 
     @SuppressLint("SetTextI18n")

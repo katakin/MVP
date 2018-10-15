@@ -19,6 +19,8 @@ interface FirstContract {
     interface Presenter {
         fun onActivityCreate(view: View, savedInstanceState: Bundle?)
 
+        fun onStart()
+
         fun onActivityDestroy()
 
         fun onNextBtnPressed()
