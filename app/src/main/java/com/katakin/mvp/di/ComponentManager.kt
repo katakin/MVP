@@ -4,15 +4,15 @@ import com.katakin.mvp.App
 import com.katakin.mvp.di.base.TreeComponent
 
 object ComponentManager {
-    private lateinit var components: TreeComponent
+    private lateinit var treeComponent: TreeComponent
     private lateinit var appComponent: AppComponent
 
     fun initAppComponent(app: App) {
         appComponent = DaggerAppComponent.builder()
                 .application(app)
                 .build()
-        components = TreeComponent(appComponent)
+        treeComponent = TreeComponent(appComponent)
     }
 
-    fun getComponents(): TreeComponent = components
+    fun getTreeComponent(): TreeComponent = treeComponent
 }
