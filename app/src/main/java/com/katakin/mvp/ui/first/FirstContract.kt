@@ -11,7 +11,7 @@ interface FirstContract {
 
         fun initPresenterText(hashCode: Int)
 
-        fun initComponents()
+        fun initTreeComponent(text: String)
 
         fun showSecondActivity()
     }

@@ -22,12 +22,12 @@
         android:layout_height="wrap_content"
         android:textSize="20sp"
         android:gravity="center"
-        app:layout_constraintBottom_toTopOf="@+id/components"
+        app:layout_constraintBottom_toTopOf="@+id/tree_component"
         app:layout_constraintTop_toBottomOf="@+id/view_id"
         tools:text="First Tab Presenter ID = ******" />
 
     <TextView
-        android:id="@+id/components"
+        android:id="@+id/tree_component"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:textSize="14sp"

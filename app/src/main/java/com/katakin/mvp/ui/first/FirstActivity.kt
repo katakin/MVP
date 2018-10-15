@@ -63,8 +63,8 @@ class FirstActivity : BaseActivity(), FirstContract.View {
         presenter_id.text = "First Presenter ID = $hashCode"
     }
 
-    override fun initComponentsText(text: String) {
-        components.text = text
+    override fun initTreeComponent(text: String) {
+        tree_component.text = text
     }
 
     override fun showSecondActivity() {

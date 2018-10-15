@@ -1,11 +1,14 @@
 package com.katakin.mvp.ui.second.tabs.second
 
+import android.os.Handler
+import com.katakin.mvp.di.ComponentManager
 import java.lang.ref.WeakReference
 import javax.inject.Inject
 
 class SecondTabPresenter @Inject constructor() : SecondTabContract.Presenter {
 
     private var viewReference: WeakReference<SecondTabContract.View>? = null
+    private val handler = Handler()
 
     override fun onFragmentAttach(view: SecondTabContract.View) {
         viewReference = WeakReference(view)
@@ -14,7 +17,10 @@ class SecondTabPresenter @Inject constructor() : SecondTabContract.Presenter {
     override fun onVisibleToUser() {
         viewReference?.get()?.initViewText()
         viewReference?.get()?.initPresenterText(hashCode())
-        viewReference?.get()?.initComponents()
+        handler.postDelayed(
+                { viewReference?.get()?.initTreeComponent(ComponentManager.getTreeComponent().toIndentedString().toString()) },
+                1000
+        )
     }
 
     override fun onInvisibleToUser() {}

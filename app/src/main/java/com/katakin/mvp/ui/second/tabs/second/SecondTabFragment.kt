@@ -65,7 +65,7 @@ class SecondTabFragment : ViewPagerFragment(), SecondTabContract.View {
         presenter_id.text = "Second Tab Presenter ID = $hashCode"
     }
 
-    override fun initComponents() {
-        components.text = "${ComponentManager.getComponents().toIndentedString()}"
+    override fun initTreeComponent(text: String) {
+        tree_component.text = text
     }
 }
