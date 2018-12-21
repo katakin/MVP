@@ -17,7 +17,7 @@ interface SplashComponent {
     class Initializer private constructor() {
         companion object {
             fun init(): SplashComponent = DaggerSplashComponent.builder()
-                    .appDependencies(CompatInjectionManager.instance.findComponent<AppComponent>())
+                    .appDependencies(CompatInjectionManager.findComponent<AppComponent>())
                     .build()
         }
     }

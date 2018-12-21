@@ -1,3 +1,7 @@
 package com.katakin.core.di
 
-interface AppDependencies
+import com.katakin.core.IPreferenceHelper
+
+interface AppDependencies {
+    fun proxyProvideUserPreferenceHelper(): IPreferenceHelper
+}

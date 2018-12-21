@@ -6,18 +6,16 @@ import dagger.Component
 import javax.inject.Singleton
 
 @Singleton
-@Component(modules = [
-    AppModule::class
-])
+@Component(modules = [AppModule::class])
 interface AppComponent : AppDependencies {
 
     fun inject(app: App)
 
-    abstract class Initializer private constructor() {
+    class Initializer private constructor() {
         companion object {
-            fun init(): AppComponent =
-                    DaggerAppComponent.builder()
-                            .build()
+            fun init(): AppComponent = DaggerAppComponent
+                .builder()
+                .build()
         }
     }
 }
