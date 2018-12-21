@@ -12,20 +12,13 @@
         android:theme="@style/AppTheme"
         tools:ignore="GoogleAppIndexingWarning">
         <activity
-            android:name=".ui.first.FirstActivity"
-            android:label="@string/first">
+            android:name=".ui.splash.SplashActivity"
+            android:label="@string/splash"
+            android:theme="@style/AppTheme.NoActionBar.FullScreen">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-        </activity>
-        <activity
-            android:name=".ui.second.SecondActivity"
-            android:label="@string/second"
-            android:parentActivityName=".ui.first.FirstActivity">
-            <meta-data
-                android:name="android.support.PARENT_ACTIVITY"
-                android:value=".ui.first.FirstActivity" />
         </activity>
     </application>
 </manifest>

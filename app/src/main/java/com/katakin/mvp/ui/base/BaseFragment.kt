@@ -5,49 +5,34 @@ import android.support.v4.app.Fragment
 
 abstract class BaseFragment : Fragment() {
 
-    protected abstract fun injectComponent()
-    protected open fun rejectComponent() {}
-
-    private var mIsStateSaved: Boolean = false
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        injectComponent()
-        super.onCreate(savedInstanceState)
-    }
+    private var isInSaveState: Boolean = false
 
     override fun onStart() {
         super.onStart()
-        mIsStateSaved = false
+        isInSaveState = false
     }
 
     override fun onResume() {
         super.onResume()
-        mIsStateSaved = false
-    }
-
-    override fun onDestroy() {
-        if (isDestroy()) {
-            rejectComponent()
-        }
-        super.onDestroy()
+        isInSaveState = false
     }
 
     override fun onSaveInstanceState(outState: Bundle) {
         super.onSaveInstanceState(outState)
-        mIsStateSaved = true
+        isInSaveState = true
     }
 
     open fun onBackPressed(): Boolean = false
 
-    private fun isDestroy(): Boolean {
+    protected fun isDestroy(): Boolean {
         if (activity?.isFinishing == true) {
             return true
         }
 
         // When we rotate device isRemoving() return true for fragment placed in backstack
         // http://stackoverflow.com/questions/34649126/fragment-back-stack-and-isremoving
-        if (mIsStateSaved) {
-            mIsStateSaved = false
+        if (isInSaveState) {
+            isInSaveState = false
             return false
         }
 
