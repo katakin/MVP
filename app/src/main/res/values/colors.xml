@@ -1,22 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">@color/indigo500</color>
-    <color name="colorPrimaryDark">@color/indigo700</color>
-    <color name="colorAccent">@color/teal</color>
-
-    <color name="textColorPrimary">@color/gray13</color>
-    <color name="textColorSecondary">@color/gray46</color>
-    <color name="colorDivider">@color/gray74</color>
-    <color name="windowBackground">@color/gray98</color>
-    <color name="colorBackground">@color/gray98</color>
-    <color name="splashBackground">@color/dark</color>
-
-    <color name="gray13">#FF212121</color>
-    <color name="gray46">#FF757575</color>
-    <color name="gray74">#FFBDBDBD</color>
-    <color name="gray98">#FFFAFAFA</color>
-    <color name="dark">#FF222222</color>
-    <color name="teal">#FF009688</color>
-    <color name="indigo500">#FF3F51B5</color>
-    <color name="indigo700">#FF303F9F</color>
+    <color name="colorPrimary">#008577</color>
+    <color name="colorPrimaryDark">#00574B</color>
+    <color name="colorAccent">#D81B60</color>
 </resources>

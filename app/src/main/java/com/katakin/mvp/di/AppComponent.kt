@@ -1,7 +1,10 @@
 package com.katakin.mvp.di
 
-import com.katakin.core.di.AppDependencies
 import com.katakin.mvp.App
+import com.katakin.mvp.di.base.BaseComponent
+import com.katakin.mvp.di.first.FirstActivityComponent
+import com.katakin.mvp.di.second.SecondActivityComponent
+import dagger.BindsInstance
 import dagger.Component
 import javax.inject.Singleton
 
@@ -9,15 +12,17 @@ import javax.inject.Singleton
 @Component(modules = [
     AppModule::class
 ])
-interface AppComponent : AppDependencies {
+interface AppComponent : BaseComponent {
 
-    fun inject(app: App)
+    fun firstBuilder(): FirstActivityComponent.Builder
 
-    abstract class Initializer private constructor() {
-        companion object {
-            fun init(): AppComponent =
-                    DaggerAppComponent.builder()
-                            .build()
-        }
+    fun secondBuilder(): SecondActivityComponent.Builder
+
+    @Component.Builder
+    interface Builder {
+        @BindsInstance
+        fun application(app: App): Builder
+
+        fun build(): AppComponent
     }
 }

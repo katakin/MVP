@@ -1,9 +1,7 @@
 <resources>
     <string name="app_name">MVP</string>
-    <string name="splash">Splash</string>
-
     <string name="first">First</string>
     <string name="second">Second</string>
+    <string name="next">next</string>
     <string name="third">Third</string>
-    <string name="title_core">Module Title</string>
 </resources>
