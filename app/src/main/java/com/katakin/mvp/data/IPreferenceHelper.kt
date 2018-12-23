@@ -1,4 +1,4 @@
-package com.katakin.core
+package com.katakin.mvp.data
 
 interface IPreferenceHelper {
     fun putString(key: String, value: String?)

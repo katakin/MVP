@@ -23,3 +23,19 @@
 -keepclassmembernames class kotlinx.** {
     volatile <fields>;
 }
+
+# === Dagger ====
+
+-dontwarn com.google.errorprone.annotations.**
+-dontwarn com.squareup.javawriter.**
+
+# ===endof Dagger ===
+
+# === App UI ===
+
+-keep class androidx.recyclerview.widget.RecyclerView {
+   public <methods>;
+}
+-keep class androidx.coordinatorlayout.widget.CoordinatorLayout$Behavior {*;}
+
+# ===endof App UI ===

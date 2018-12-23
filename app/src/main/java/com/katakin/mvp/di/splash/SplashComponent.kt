@@ -1,7 +1,7 @@
 package com.katakin.mvp.di.splash
 
-import com.katakin.core.di.AppDependencies
 import com.katakin.mvp.di.AppComponent
+import com.katakin.mvp.di.AppDependencies
 import com.katakin.mvp.ui.splash.SplashActivity
 import dagger.Component
 import me.vponomarenko.injectionmanager.support.CompatInjectionManager

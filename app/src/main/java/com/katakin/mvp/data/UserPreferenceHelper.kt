@@ -1,4 +1,4 @@
-package com.katakin.core
+package com.katakin.mvp.data
 
 import android.content.Context
 import android.content.SharedPreferences

@@ -16,6 +16,6 @@ class App : Application(), IHasComponent<AppComponent> {
     }
 
     override fun getComponent(): AppComponent {
-        return AppComponent.Initializer.init()
+        return AppComponent.Initializer.init(this)
     }
 }

@@ -1,4 +1,4 @@
-package com.katakin.mvp.ui.base.mvp
+package com.katakin.mvp.base.ui.mvp
 
 interface MvpPresenter<V : MvpView> {
     fun onAttachView(view: V)

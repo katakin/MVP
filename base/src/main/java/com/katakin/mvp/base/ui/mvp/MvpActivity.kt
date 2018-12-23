@@ -1,7 +1,7 @@
-package com.katakin.mvp.ui.base.mvp
+package com.katakin.mvp.base.ui.mvp
 
 import android.os.Bundle
-import com.katakin.mvp.ui.base.BaseActivity
+import com.katakin.mvp.base.ui.BaseActivity
 import javax.inject.Inject
 
 abstract class MvpActivity<V : MvpView, P : MvpPresenter<V>> : BaseActivity(), MvpView {
@@ -10,10 +10,11 @@ abstract class MvpActivity<V : MvpView, P : MvpPresenter<V>> : BaseActivity(), M
     lateinit var presenter: P
 
     override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
         injectComponent()
-        presenter.onAttachView(getView())
+        super.onCreate(savedInstanceState)
         onCreateView(savedInstanceState)
+        presenter.onAttachView(getView())
+        onPresenterAttached(savedInstanceState)
     }
 
     abstract fun injectComponent()
@@ -21,6 +22,8 @@ abstract class MvpActivity<V : MvpView, P : MvpPresenter<V>> : BaseActivity(), M
     abstract fun onCreateView(savedInstanceState: Bundle?)
 
     abstract fun getView(): V
+
+    open fun onPresenterAttached(savedInstanceState: Bundle?) {}
 
     override fun onDestroy() {
         presenter.onDetachView()

@@ -1,0 +1,40 @@
+apply from: "$rootProject.projectDir/buildsystem/version.gradle"
+
+ext {
+    dependencies = [
+            //kotlin
+            kotlin_stdlib_jdk7      : "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlinVersion",
+
+            //android-support
+            appcompat               : "com.android.support:appcompat-v7:$supportVersion",
+            design                  : "com.android.support:design:$supportVersion",
+            recyclerView            : "com.android.support:recyclerview-v7:$supportVersion",
+
+            //dagger
+            dagger                  : "com.google.dagger:dagger:$daggerVersion",
+            daggerCompiler          : "com.google.dagger:dagger-compiler:$daggerVersion",
+            componentsmanager       : "com.github.valeryponomarenko.componentsmanager:appcompat:2.0.1",
+
+            //rx
+            rxjava2                 : "io.reactivex.rxjava2:rxjava:2.2.4",
+
+            //ui
+            constraint_layout       : "com.android.support.constraint:constraint-layout:1.1.3"
+    ]
+
+    dagger = [
+            [configuration: "api", dependency: dependencies.dagger],
+            [configuration: "api", dependency: dependencies.componentsmanager],
+            [configuration: "kapt", dependency: dependencies.daggerCompiler],
+    ]
+
+    base = [
+            [configuration: "api", dependency: dependencies.kotlin_stdlib_jdk7],
+            [configuration: "api", dependency: dependencies.appcompat],
+            [configuration: "api", dependency: dependencies.constraint_layout],
+            [configuration: "api", dependency: dependencies.rxjava2, options: {
+                exclude group: 'org.reactivestreams', module: 'reactive-streams'
+            }],
+            [configuration: "api", dependency: "javax.inject:javax.inject:1"]
+    ]
+}

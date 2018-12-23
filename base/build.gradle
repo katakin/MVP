@@ -1,0 +1,24 @@
+apply plugin: 'com.android.feature'
+apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-android-extensions'
+
+apply from: '../buildsystem/android_commons.gradle'
+
+
+android {
+    baseFeature true
+
+    buildTypes {
+        all {
+            consumerProguardFiles 'proguard-rules.pro'
+        }
+    }
+}
+
+dependencies {
+    application project(':app')
+
+    rootProject.base.each { item ->
+        add(item.configuration, item.dependency, item.options)
+    }
+}

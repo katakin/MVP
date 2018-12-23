@@ -1,38 +1,41 @@
-package com.katakin.mvp.ui.base.mvp
+package com.katakin.mvp.base.ui.mvp
 
 import android.os.Bundle
 import android.view.View
-import com.katakin.mvp.ui.base.BaseFragment
+import com.katakin.mvp.base.ui.BaseDialogFragment
 import javax.inject.Inject
 
-abstract class MvpFragment<V : MvpView, P : MvpBasePresenter<V>> : BaseFragment(), MvpView {
+abstract class MvpDialogFragment<V : MvpView, P : MvpBasePresenter<V>> : BaseDialogFragment(), MvpView {
 
     @Inject
     lateinit var presenter: P
 
     override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
         injectComponent()
+        super.onCreate(savedInstanceState)
     }
 
     abstract fun injectComponent()
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        presenter.onAttachView(getFragmentView())
+        presenter.onAttachView(getFragment())
+        onPresenterAttached(savedInstanceState)
     }
 
-    abstract fun getFragmentView(): V
+    abstract fun getFragment(): V
+
+    open fun onPresenterAttached(savedInstanceState: Bundle?) {}
 
     override fun onDestroyView() {
-        super.onDestroyView()
         presenter.onDetachView()
+        super.onDestroyView()
     }
 
     override fun onDestroy() {
-        super.onDestroy()
         if (isDestroy()) {
             presenter.onDestroy()
         }
+        super.onDestroy()
     }
 }

@@ -2,8 +2,8 @@ package com.katakin.mvp.ui.splash
 
 import android.os.Bundle
 import com.katakin.mvp.R
+import com.katakin.mvp.base.ui.mvp.MvpActivity
 import com.katakin.mvp.di.splash.SplashComponent
-import com.katakin.mvp.ui.base.mvp.MvpActivity
 import me.vponomarenko.injectionmanager.IHasComponent
 import me.vponomarenko.injectionmanager.support.CompatInjectionManager
 

@@ -1,4 +1,4 @@
-package com.katakin.mvp.ui.base.mvp
+package com.katakin.mvp.base.ui.mvp
 
 import android.support.annotation.CallSuper
 import io.reactivex.disposables.CompositeDisposable
@@ -21,7 +21,7 @@ abstract class MvpBasePresenter<V : MvpView> : MvpPresenter<V> {
     override fun onAttachView(view: V) {
         viewReference = WeakReference(view)
 
-        if (firstViewAttach) {
+        if (!firstViewAttach) {
             firstViewAttach = true
             onFirstViewAttach()
         }
@@ -37,7 +37,7 @@ abstract class MvpBasePresenter<V : MvpView> : MvpPresenter<V> {
 
     @CallSuper
     override fun onDestroy() {
-        compositeDestroyDisposable?.clear()
+        compositeDestroyDisposable?.dispose()
     }
 
     fun Disposable.disposeOnDetach() {
